@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-		<title>three.js webgl - worker - offscreen canvas</title>
+		<title>three.js - ammo.js - web worker - offscreen canvas</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<link type="text/css" rel="stylesheet" href="assets/main.css">
 		<style>
 			body {
+                margin: 0;
 				background-color: #fff;
 				color: #444;
+                font-family: Monospace;
+                font-size: 13px;
+                line-height: 24px;
+                overscroll-behavior: none;
 			}
-
 			a {
 				color: #08f;
 			}
@@ -47,7 +50,28 @@
 				padding: 4px 6px;
 				background: #dddddd;
 				outline: none;
-			}
+                cursor: pointer;
+            }
+
+
+            #info {
+                position: absolute;
+                top: 0px;
+                width: 100%;
+                padding: 10px;
+                box-sizing: border-box;
+                text-align: center;
+                -moz-user-select: none;
+                -webkit-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                pointer-events: none;
+                z-index: 1; /* TODO Solve this in HTML */
+            }
+
+            a, button, input, select {
+                pointer-events: auto;
+            }
 		</style>
   </head>
 
