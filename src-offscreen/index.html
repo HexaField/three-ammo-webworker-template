@@ -30,8 +30,8 @@
 
 			#container {
 				position: absolute;
-				top: 50px;
-				bottom: 70px;
+				top: 80px;
+				bottom: 80px;
 				width: 100%;
 			}
 
@@ -53,7 +53,9 @@
 
   <body>
 		<div id="info">
-			<a href="https://threejs.org" target="_blank" rel="noopener noreferrer">three.js</a> - offscreen canvas (<a href="https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas" target="_blank" rel="noopener noreferrer">about</a>)<br/>
+            <a href="https://threejs.org" target="_blank" rel="noopener noreferrer">three.js</a> - offscreen canvas & <a href="https://enable3d.io" target="_blank" rel="noopener noreferrer">enable3d</a> - ammo.js wrapper<br/> 
+            adapted by <a href="https://github.com/hexafield">HexaField</a> | <a href="https://github.com/hexafield/three-ammo-webworker-template">source</a><br/> 
+            native thread | seperate thread<br/> 
 			<p id="message">Your browser does not support OffscreenCanvas. Check the browser support <a href="https://caniuse.com/#feat=offscreencanvas" target="_blank" rel="noopener noreferrer">here</a></p>
 		</div>
 
@@ -61,8 +63,11 @@
 			<canvas id="canvas1" style="width: 50%; height: 100%"></canvas><canvas id="canvas2" style="width: 50%; height: 100%"></canvas>
 		</div>
 		<div id="ui">
-			<button id="button">START JANK</button><br/>
-			<span id="result"></span>
+			<button id="button">Start Jank</button>
+            <span id="result"></span><br/>
+            <button id="buttondrop">Drop</button>
+            <label for="dropcount"></label><input type="number" id="dropcount" name="dropcount" value="20">
+			<button id="buttonclear">Clear</button>
 		</div>
   </body>
 </html>

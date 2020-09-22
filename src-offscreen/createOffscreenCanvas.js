@@ -85,42 +85,71 @@ function filteredKeydownEventHandler(event, sendFn) {
 }
 
 let nextProxyId = 0;
-class ElementProxy {
-    constructor(element, worker, eventHandlers) {
+class ElementProxy
+{
+    constructor(element, worker, eventHandlers)
+    {
         this.id = nextProxyId++;
+
+        this.element = element;
         this.worker = worker;
-        const sendEvent = (data) => {
-            this.worker.postMessage({
-                type: 'event',
-                id: this.id,
-                data,
-            });
-        };
+        this.eventHandlers = eventHandlers;
+        this.sendEvent = this.sendEvent.bind(this);
+        this.sendSize = this.sendSize.bind(this);
 
-        // register an id
-        worker.postMessage({
-            type: 'makeProxy',
+        this.initialise()
+    }
+
+    dispatchEvent(event)
+    {
+        this.worker.postMessage({
+            type: 'customevent',
             id: this.id,
+            data: {
+                type: event.type,
+                detail: event.detail
+            },
         });
-        sendSize();
-        for (const [eventName, handler] of Object.entries(eventHandlers)) {
-            element.addEventListener(eventName, function(event) {
-                handler(event, sendEvent);
-            });
-        }
+    }
 
-        function sendSize() {
-        const rect = element.getBoundingClientRect();
-        sendEvent({
+    sendEvent(data)
+    {
+        this.worker.postMessage({
+            type: 'event',
+            id: this.id,
+            data,
+        });
+    }
+
+    sendSize()
+    {
+        const rect = this.element.getBoundingClientRect();
+        this.sendEvent({
             type: 'size',
             left: rect.left,
             top: rect.top,
-            width: element.clientWidth,
-            height: element.clientHeight,
+            width: this.element.clientWidth,
+            height: this.element.clientHeight,
         });
+    }
+
+    initialise()
+    {
+        // register an id
+        this.worker.postMessage({
+            type: 'makeProxy',
+            id: this.id,
+        });
+
+        for (const [eventName, handler] of Object.entries(this.eventHandlers)) {
+            this.element.addEventListener(eventName, (event) => {
+                handler(event, this.sendEvent);
+            });
         }
+
+        this.sendSize();
         // really need to use ResizeObserver
-        window.addEventListener('resize', sendSize);
+        window.addEventListener('resize', this.sendSize);
     }
 }
 
@@ -151,12 +180,10 @@ export function startWorker(canvas, entryPoint) {
         canvasId: proxy.id,
         devicePixelRatio: window.devicePixelRatio
     }, [offscreen]);
-    console.log('using OffscreenCanvas');  /* eslint-disable-line no-console */
+    return proxy
 }
 export function main(canvas, entryPoint) {  /* eslint consistent-return: 0 */
     if (canvas.transferControlToOffscreen) {
-        startWorker(canvas, entryPoint);
-        return true
+        return startWorker(canvas, entryPoint);
     }
-    return false
 }

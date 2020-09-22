@@ -45,6 +45,7 @@ class ProxyManager {
   constructor() {
     this.targets = {};
     this.handleEvent = this.handleEvent.bind(this);
+    this.handleCustomEvent = this.handleCustomEvent.bind(this);
   }
   makeProxy(data) {
     const {id} = data;
@@ -56,6 +57,9 @@ class ProxyManager {
   }
   handleEvent(data) {
     //   console.log(data.data)
+    this.targets[data.id].handleEvent(data.data);
+  }
+  handleCustomEvent(data) {
     this.targets[data.id].handleEvent(data.data);
   }
 }
@@ -81,6 +85,7 @@ const handlers = {
   start,
   makeProxy,
   event: proxyManager.handleEvent,
+  customevent: proxyManager.handleCustomEvent,
 };
 
 self.onmessage = function(e) {
