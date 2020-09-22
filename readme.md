@@ -6,14 +6,14 @@ A template for running ammojs with threejs in an Offscreen Canvas for greatly im
 
 You can find a working demo [here](https://three-ammo-webworker-template.netlify.app/) 
 
-This has been mostly taken from [the threejs canvas example](https://threejs.org/examples/?q=offsc#webgl_worker_offscreencanvas), [enable3d's ammo wrapper](https://enable3d.io) and [the Three.js Rendering on Demand
+This has been mostly taken and adapted from [the threejs offscreen-canvas example](https://threejs.org/examples/?q=offsc#webgl_worker_offscreencanvas), [enable3d's ammo wrapper](https://enable3d.io) and [the Three.js Rendering on Demand
 ](https://threejsfundamentals.org/threejs/lessons/threejs-rendering-on-demand.html) and improved upon
 
 
 ## TODO: 
 
-- A nice API for arbitrary multi threading
-- Canvas -> DOM 
+- A nice API for arbitrary threading
+- Worker -> DOM events
 - Ammojs WASM support
 - Seperately threaded physics
 - Update @enable3d/ammo-physics to run with latest threejs
