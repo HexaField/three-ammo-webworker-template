@@ -54,12 +54,13 @@ export default function (data)
             physics.destroy(obj.body)
             scene.remove(obj)
         }
+        objects = []
 
         // physics.add.ground({ width: 20, height: 20 })
     })
 
     inputElement.addEventListener('drop', (event) => {
-        objects = HaveSomeFun(event.detail, physics)
+        objects.push(...HaveSomeFun(event.detail, physics))
     })
 
 
