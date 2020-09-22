@@ -8,7 +8,7 @@ module.exports = {
   target: 'node', 
   entry: {
     bundle: './src-offscreen/index.js',
-    worker: './src-offscreen/offscreen.js'
+    worker: './src-offscreen/elementProxyReceiver.js'
   },
   output: {
     filename: '[name].js',

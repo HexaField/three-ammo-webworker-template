@@ -3,34 +3,21 @@
 
 import initJank from './jank.js';
 import init from './scene.js';
+import { main } from './createOffscreenCanvas'
 
 var canvas1 = document.getElementById( 'canvas1' );
 var canvas2 = document.getElementById( 'canvas2' );
 
-var width = canvas1.clientWidth;
-var height = canvas1.clientHeight;
-var pixelRatio = window.devicePixelRatio;
-
 // load on screen canvas
+canvas1.devicePixelRatio = window.devicePixelRatio
 
-init( canvas1, width, height, pixelRatio);
+init({ canvas: canvas1, inputElement: canvas1 });
 initJank();
 
 // load off screen canvas
 
-if ( 'transferControlToOffscreen' in canvas2 ) {
-
-    var offscreen = canvas2.transferControlToOffscreen();
-    var worker = new Worker( 'worker.js', { type: 'module' } );
-    worker.postMessage( {
-        canvas: offscreen,
-        width: canvas2.clientWidth,
-        height: canvas2.clientHeight,
-        pixelRatio: window.devicePixelRatio,
-    }, [ offscreen ] );
-
+if(main(canvas2, 'worker.js')) {
+    console.log('Successfully loaded offscreen canvas!')
 } else {
-
     document.getElementById( 'message' ).style.display = 'block';
-
 }

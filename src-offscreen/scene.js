@@ -4,25 +4,30 @@ import { OrbitControls } from './OrbitControls'
 
 import Ammo from '../lib/ammo.worker.js'
 
-const MainScene = (canvas, width, height, pixelRatio) => {
+export default function (data) 
+{
+    Ammo() // synchronous when not using wasm
+
+    const { canvas, inputElement } = data;
+
     // scene
     const scene = new THREE.Scene()
     scene.background = new THREE.Color(0xf0f0f0)
 
     // camera
-    const camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000)
+    const camera = new THREE.PerspectiveCamera(50, inputElement.clientWidth / inputElement.clientHeight, 0.1, 1000)
     camera.position.set(10, 10, 20)
 
     // renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true, canvas: canvas })
-    renderer.setSize(width, height, false)
+    renderer.setSize(inputElement.clientWidth, inputElement.clientHeight, false)
 
     // dpr
-    const DPR = pixelRatio
+    const DPR = inputElement.devicePixelRatio
     renderer.setPixelRatio(Math.min(2, DPR))
 
     // orbit controls
-    const controls = new OrbitControls(camera, renderer.domElement)
+    const controls = new OrbitControls(camera, inputElement)
 
     // light
     scene.add(new THREE.HemisphereLight(0xffffbb, 0x080820, 1))
@@ -86,23 +91,34 @@ const MainScene = (canvas, width, height, pixelRatio) => {
     // clock
     const clock = new THREE.Clock()
 
+    function resizeRendererToDisplaySize(renderer) {
+        const canvas = renderer.domElement;
+        const width = inputElement.clientWidth;
+        const height = inputElement.clientHeight;
+        const needResize = canvas.width !== width || canvas.height !== height;
+        if (needResize) {
+            renderer.setSize(width, height, false);
+        }
+        return needResize;
+    }
+
     // loop
     const animate = () => {
-      cube.rotation.x += 0.01
-      cube.rotation.y += 0.01
-      cube.body.needUpdate = true // this is how you update kinematic bodies
+        if (resizeRendererToDisplaySize(renderer)) {
+            camera.aspect = inputElement.clientWidth / inputElement.clientHeight;
+            camera.updateProjectionMatrix();
+        }
+        cube.rotation.x += 0.01
+        cube.rotation.y += 0.01
+        cube.body.needUpdate = true // this is how you update kinematic bodies
 
-      physics.update(clock.getDelta() * 1000)
-      physics.updateDebugger()
-      renderer.render(scene, camera)
+        controls.update()
 
-      requestAnimationFrame(animate)
+        physics.update(clock.getDelta() * 1000)
+        physics.updateDebugger()
+        renderer.render(scene, camera)
+
+        requestAnimationFrame(animate)
     }
     requestAnimationFrame(animate)
-  }
-
-export default function (canvas, width, height, pixelRatio) {
-    Ammo().then(() => {
-        MainScene(canvas, width, height, pixelRatio)
-    })
 }
