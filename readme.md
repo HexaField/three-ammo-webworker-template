@@ -10,3 +10,4 @@ A template for running ammojs with threejs in an Offscreen Canvas for greatly im
 - Canvas -> DOM 
 - Ammojs WASM support
 - Seperately threaded physics
+- Update @enable3d/ammo-physics to run with latest threejs
