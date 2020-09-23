@@ -7,8 +7,8 @@ module.exports = {
   devtool: '',
   target: 'node',
   entry: {
-    bundle: './src-offscreen/index.js',
-    worker: './src-offscreen/elementProxyReceiver.js'
+    bundle: './example/index.js',
+    worker: './example/elementProxyReceiver.js'
   },
   output: {
     filename: '[name].js',
@@ -30,6 +30,6 @@ module.exports = {
     new webpack.optimize.LimitChunkCountPlugin({
         maxChunks: 1
     }),
-    new HtmlWebpackPlugin({ template: './src-offscreen/index.html' })
+    new HtmlWebpackPlugin({ template: './example/index.html' })
   ]
 }
