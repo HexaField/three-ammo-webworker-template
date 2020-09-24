@@ -1,26 +1,18 @@
 {
-  "name": "three-ammo-webworker-template",
-  "version": "0.1.0",
-  "description": "",
-  "main": "dist/index.js",
   "scripts": {
-    "start": "webpack-dev-server",
-    "build": "webpack --config ./webpack.build.js"
+    "start": "snowpack dev",
+    "build": "snowpack build",
+    "test": "echo \"This template does not include a test runner by default.\" && exit 1",
+    "format": "prettier --write \"src/**/*.js\"",
+    "lint": "prettier --check \"src/**/*.js\""
   },
-  "keywords": [],
   "dependencies": {
     "@enable3d/ammo-physics": "^0.19.1",
-    "brotli-webpack-plugin": "^1.1.0",
-    "three": "0.117"
+    "ammojs-typed": "^1.0.6",
+    "canvas-confetti": "^1.2.0"
   },
   "devDependencies": {
-    "copy-webpack-plugin": "^5.1.1",
-    "html-webpack-plugin": "^3.2.0",
-    "ts-loader": "^6.2.1",
-    "typescript": "^3.8.2",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.9.0",
-    "webpack-obfuscator": "^0.18.7"
+    "prettier": "^2.0.5",
+    "snowpack": "^2.11.0"
   }
 }

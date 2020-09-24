@@ -3,12 +3,12 @@ import * as THREE from 'three'
 import { OrbitControls } from './OrbitControls'
 import HaveSomeFun from './havesomefun'
 
-import Ammo from '../lib/ammo.worker.js'
+import Ammo from './lib/ammo.worker.js'
+Ammo()
+// console.log(Ammo)
 
-export default function (data) 
+export default function (data)
 {
-    Ammo() // synchronous when not using wasm
-
     const { canvas, inputElement } = data;
 
     // scene

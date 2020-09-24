@@ -1,0 +1,12 @@
+{
+  "mount": {
+    "public": "/",
+    "src": "/_dist_"
+  },
+  "plugins": [],
+  "installOptions": {
+    "namedExports": [
+      "@enable3d/ammo-physics"
+    ]
+  }
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>three.js - ammo.js - web worker - offscreen canvas</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<style>
+		body {
+			margin: 0;
+			background-color: #fff;
+			color: #444;
+			font-family: Monospace;
+			font-size: 13px;
+			line-height: 24px;
+			overscroll-behavior: none;
+		}
+
+		a {
+			color: #08f;
+		}
+
+		canvas {
+			display: inline-block;
+		}
+
+		#message {
+			color: #ff0000;
+			display: none;
+		}
+
+		#message>a {
+			color: #ff0000;
+		}
+
+		#container {
+			position: absolute;
+			top: 80px;
+			bottom: 80px;
+			width: 100%;
+		}
+
+		#ui {
+			position: absolute;
+			bottom: 20px;
+			width: 100%;
+			text-align: center;
+		}
+
+		#button {
+			border: 0;
+			padding: 4px 6px;
+			background: #dddddd;
+			outline: none;
+			cursor: pointer;
+		}
+
+
+		#info {
+			position: absolute;
+			top: 0px;
+			width: 100%;
+			padding: 10px;
+			box-sizing: border-box;
+			text-align: center;
+			-moz-user-select: none;
+			-webkit-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			pointer-events: none;
+			z-index: 1;
+			/* TODO Solve this in HTML */
+		}
+
+		a,
+		button,
+		input,
+		select {
+			pointer-events: auto;
+		}
+	</style>
+</head>
+
+<body>
+	<script src="/_dist_/index.js" type="module"></script>
+	<div id="info">
+		<a href="https://threejs.org" target="_blank" rel="noopener noreferrer">three.js</a> - offscreen canvas & <a
+			href="https://enable3d.io" target="_blank" rel="noopener noreferrer">enable3d</a> - ammo.js wrapper<br />
+		adapted by <a href="https://github.com/hexafield">HexaField</a> | <a
+			href="https://github.com/hexafield/three-ammo-webworker-template">source</a><br />
+		native thread | seperate thread<br />
+		<p id="message">Your browser does not support OffscreenCanvas. Check the browser support <a
+				href="https://caniuse.com/#feat=offscreencanvas" target="_blank" rel="noopener noreferrer">here</a></p>
+	</div>
+
+	<div id="container">
+		<canvas id="canvas1" style="width: 50%; height: 100%"></canvas><canvas id="canvas2"
+			style="width: 50%; height: 100%"></canvas>
+	</div>
+	<div id="ui">
+		<button id="button">Start Jank</button>
+		<span id="result"></span><br />
+		<button id="buttondrop">Drop</button>
+		<label for="dropcount"></label><input type="number" id="dropcount" name="dropcount" value="20">
+		<button id="buttonclear">Clear</button>
+	</div>
+</body>
+
+</html>
