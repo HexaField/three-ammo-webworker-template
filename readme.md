@@ -1,6 +1,8 @@
 # Three Ammo Offscreen Canvas
 
-A template for running ammojs and threejs in an Offscreen Canvas for greatly improved performance. This API automatically detects if there is no offscreen canvas option available and defaults to using the main thread.
+A template for running ammojs and threejs in an Offscreen Canvas for greatly improved performance. This template automatically detects if there is no offscreen canvas option available and defaults to using the main thread.
+
+This template allows you to use document and window as normal in the web worker context. This requires modification to some THREE modules such as [OrbitControls](https://github.com/HexaField/three-ammo-webworker-template/blob/727a0a4378486a7be925f72d1f77f09d1177cff2/src/app/OrbitControls.js#L21), If you wish to disable this, remove [these lines](https://github.com/HexaField/three-ammo-webworker-template/blob/727a0a4378486a7be925f72d1f77f09d1177cff2/src/offscreencanvas/elementProxyReceiver.js#L93).
 
 You can find a working demo [here](https://three-ammo-webworker-template.netlify.app/) 
 
