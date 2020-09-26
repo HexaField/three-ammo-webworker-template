@@ -1,5 +1,4 @@
+import { elementProxyReceiver } from './offscreencanvas';
+import init from './app/index.js';
 
-import { elementProxyReceiver } from './offscreencanvas'
-import init from './app/index.js'
-
-elementProxyReceiver(init)
+elementProxyReceiver(init);

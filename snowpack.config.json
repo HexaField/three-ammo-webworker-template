@@ -3,7 +3,19 @@
     "public": "/",
     "src": "/_dist_"
   },
-  "plugins": [],
+  "plugins": [
+    [
+      "@snowpack/plugin-optimize"
+    ],
+    [
+      "snowpack-plugin-skypack-replacer", {
+        "modules": {
+          "three": "^0.117.1"
+        },
+        "extensions": [".js"]
+      }
+    ]
+  ],
   "installOptions": {
     "namedExports": [
       "@enable3d/ammo-physics"
